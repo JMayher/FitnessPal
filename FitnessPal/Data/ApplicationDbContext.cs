@@ -10,6 +10,9 @@ namespace FitnessPal.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<ExerciseCategory> Categories { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
