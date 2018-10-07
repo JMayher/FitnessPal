@@ -35,6 +35,8 @@ namespace FitnessPal.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<int>("ExerciseID");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -60,6 +62,8 @@ namespace FitnessPal.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExerciseID");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -76,6 +80,8 @@ namespace FitnessPal.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<int>("CategoryID");
 
                     b.Property<int>("Duration");
@@ -83,6 +89,8 @@ namespace FitnessPal.Data.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryID");
 
@@ -209,8 +217,20 @@ namespace FitnessPal.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FitnessPal.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("FitnessPal.Models.Exercise", "Exercise")
+                        .WithMany()
+                        .HasForeignKey("ExerciseID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("FitnessPal.Models.Exercise", b =>
                 {
+                    b.HasOne("FitnessPal.Models.ApplicationUser")
+                        .WithMany("ExerciseUsers")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("FitnessPal.Models.ExerciseCategory", "Category")
                         .WithMany("Exercises")
                         .HasForeignKey("CategoryID")

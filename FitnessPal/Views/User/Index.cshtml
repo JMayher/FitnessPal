@@ -1,0 +1,21 @@
+﻿@model IEnumerable<FitnessPal.Models.AccountUser>
+
+<h1>Users</h1>
+
+
+
+<ul>
+    @foreach (var user in Model)
+    {
+
+
+        <li>
+            <a asp-controller="User"
+               asp-action="ViewUser"
+               asp-route-id="@user.ID">@user.AccountUserName</a>
+        </li>
+
+    }
+</ul>
+
+<p><a asp-controller="User" asp-action="Add">Add User</a></p>

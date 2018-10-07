@@ -1,0 +1,19 @@
+﻿@model List<FitnessPal.Models.Date>
+
+<h1>Dates</h1>
+
+<ul>
+    @foreach (var date in Model)
+    {
+
+        <li>
+            <a asp-controller="Exercise"
+               asp-action="Date"
+               asp-route-id="@date.ID">@date.Edate</a>
+        </li>
+
+
+    }
+</ul>
+
+<p><a asp-controller="Date" asp-action="Add">Add Date</a></p>

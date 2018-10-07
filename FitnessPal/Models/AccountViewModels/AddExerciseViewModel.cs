@@ -19,6 +19,14 @@ namespace FitnessPal.Models.AccountViewModels
         [Display(Name = "Exercise Type")]
         public int CategoryID { get; set; }
 
+        
+
+        public int ApplicationUserID { get; set; }
+
+        public int ExerciseID { get; set; }
+
+        
+
         public List<SelectListItem> Categories { get; set; }
 
         public AddExerciseViewModel(IEnumerable<ExerciseCategory> categories)

@@ -1,0 +1,28 @@
+﻿@model FitnessPal.Models.AccountViewModels.ViewDateViewModel
+
+@{
+    ViewBag.Title = Model.Date.Edate;
+}
+
+<title>@ViewBag.Title</title>
+<h2>@Model.Date.Edate</h2>
+
+
+
+
+
+
+@foreach (var ExerciseUser in Model.Things)
+{
+    <li>
+        <div>
+            <input type="checkbox" id="_@ExerciseUser.DateID" />
+            <label for="Check_@ExerciseUser.ExerciseID"> @ExerciseUser.Exercise.Name</label>
+            @ExerciseUser.Exercise.Duration
+
+
+        </div>
+    </li>
+
+
+}

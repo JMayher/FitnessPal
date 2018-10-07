@@ -7,6 +7,7 @@ using FitnessPal.Models.AccountViewModels;
 using FitnessPal.Data;
 using Microsoft.EntityFrameworkCore;
 using FitnessPal.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 
 namespace FitnessPal.Controllers
@@ -22,10 +23,13 @@ namespace FitnessPal.Controllers
 
         public IActionResult Index()
         {
+           
+            {
+                IList<Exercise> exercises = context.Exercises.Include(c => c.Category).ToList();
+                ViewBag.title = "Home page for " + User.Identity.Name;
+                return View(exercises);
+            }
             
-            IList<Exercise> exercises = context.Exercises.Include(c => c.Category).ToList();
-
-            return View(exercises);
         }
 
         [Authorize]
@@ -40,7 +44,8 @@ namespace FitnessPal.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                var currentuser = HttpContext.User.Identity.Name;
+               
                 ExerciseCategory newExerciseCategory =
                     context.Categories.Single(c => c.ID == addExerciseViewModel.CategoryID);
                 Exercise newExercise = new Exercise

@@ -13,7 +13,7 @@ namespace FitnessPal.Controllers
     public class CategoryController : Controller
     {
         private ApplicationDbContext context;
-        
+
         public CategoryController(ApplicationDbContext dbContext)
         {
             context = dbContext;

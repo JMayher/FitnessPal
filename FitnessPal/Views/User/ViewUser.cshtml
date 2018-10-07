@@ -1,0 +1,33 @@
+﻿@model FitnessPal.Models.AccountViewModels.ViewUserViewModel
+
+@{
+    ViewBag.Title = Model.AccountUser.AccountUserName;
+}
+
+<title>@ViewBag.Title</title>
+<h2>@Model.AccountUser.AccountUserName</h2>
+
+
+
+
+
+
+@foreach (var ExerciseUser in Model.Things)
+{
+    <li>
+        <div>
+            <input type="checkbox" id="_@ExerciseUser.ExerciseID" />
+            <label for="Check_@ExerciseUser.ExerciseID"> @ExerciseUser.Exercise.Name</label>
+            @ExerciseUser.Exercise.Duration
+            <a asp-controller="Date" asp-action="ViewDate"
+               asp-route-id="@ExerciseUser.Date.ID">@ExerciseUser.Date.Edate</a>
+
+        </div>
+    </li>
+
+
+}
+
+
+
+<p><a asp-controller="User" asp-action="AddItem" asp-route-id="@Model.AccountUser.ID">Add Item</a></p>
